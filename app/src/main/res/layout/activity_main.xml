@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".feedback.HeartMeActivity">
+
+    <TextView
+        android:id="@+id/headLine"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="40dp"
+        android:text="Submit blood test results"
+        android:textSize="20dp" />
+
+    <EditText
+        android:id="@+id/testName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="50dp"
+        android:layout_below="@+id/headLine"
+        android:layout_centerInParent="true"
+        android:ems="10"
+        android:layout_marginTop="60dp"
+        android:text="Enter parameter name" />
+
+    <EditText
+        android:id="@+id/testValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@id/testName"
+        android:layout_below="@+id/testName"
+        android:ems="10"
+        android:layout_marginTop="50dp"
+        android:text="Enter parameter value"/>
+    <ImageView
+        android:id="@+id/feedbackImg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/testValue"
+        android:layout_above="@id/button"
+        android:layout_margin="20dp"/>
+
+
+
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="40dp"
+        android:text="Submit"
+        tools:layout_editor_absoluteX="148dp"
+        tools:layout_editor_absoluteY="447dp" />
+
+
+</RelativeLayout>
