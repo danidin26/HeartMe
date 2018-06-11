@@ -1,4 +1,4 @@
-package com.dannysh.heartme.feedback;
+package com.dannysh.heartme;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -10,6 +10,8 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 
 import com.dannysh.heartme.R;
+import com.dannysh.heartme.feedback.FeedbackPresenter;
+import com.dannysh.heartme.feedback.FeedbackView;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 

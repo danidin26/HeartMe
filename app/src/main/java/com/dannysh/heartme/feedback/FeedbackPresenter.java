@@ -43,7 +43,7 @@ public class FeedbackPresenter {
         String targetTestName="";
 
         Set<String> repoTestNames = _repo.getTestNames();
-        if(repoTestNames.isEmpty()){
+        if(repoTestNames!=null && repoTestNames.isEmpty()){
             _view.showFeedback("" , Constants.ERROR_IMG_URL);
             return;
         }

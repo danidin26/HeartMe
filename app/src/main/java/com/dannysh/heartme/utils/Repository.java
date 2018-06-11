@@ -16,16 +16,11 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class Repository {
 
-    AwsAPI _api;
-    BloodTestConfig _bloodTestConfig = null;
+    private AwsAPI _api;
+    private BloodTestConfig _bloodTestConfig = null;
     private HashMap<String, Double> _testToThreshold = null;
 
-    public BloodTestConfig get_bloodTestConfig() {
-        return _bloodTestConfig;
-    }
-
-    public void loadData() {
-
+    public Repository() {
         HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
         interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
         OkHttpClient client = new OkHttpClient.Builder()
@@ -39,6 +34,16 @@ public class Repository {
                 .build();
 
         _api = retrofit.create(AwsAPI.class);
+    }
+
+    public BloodTestConfig get_bloodTestConfig() {
+        return _bloodTestConfig;
+    }
+
+
+    public void loadData() {
+
+
 
         Call<BloodTestConfig> parameters = _api.getTestData(Constants.S3_PATH_URL);
         parameters.enqueue(new Callback<BloodTestConfig>() {
