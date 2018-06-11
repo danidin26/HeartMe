@@ -19,40 +19,40 @@
         android:id="@+id/testName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="50dp"
         android:layout_below="@+id/headLine"
         android:layout_centerInParent="true"
-        android:ems="10"
+        android:layout_marginLeft="50dp"
         android:layout_marginTop="60dp"
-        android:text="Enter parameter name" />
+        android:ems="10"
+        android:hint="Enter parameter name"/>
 
     <EditText
         android:id="@+id/testValue"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@id/testName"
-        android:layout_below="@+id/testName"
-        android:ems="10"
-        android:layout_marginTop="50dp"
-        android:text="Enter parameter value"/>
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_alignLeft="@id/testName"
+    android:layout_below="@+id/testName"
+    android:ems="10"
+    android:layout_marginTop="50dp"
+    android:hint="Enter parameter value"/>
+
     <ImageView
         android:id="@+id/feedbackImg"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@+id/testValue"
+        android:layout_width="250dp"
+        android:layout_height="200dp"
         android:layout_above="@id/button"
-        android:layout_margin="20dp"/>
+        android:layout_below="@+id/testValue"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="20dp" />
+
     <ProgressBar
         android:id="@+id/progressBar1"
         style="?android:attr/progressBarStyleLarge"
-        android:layout_above="@+id/button"
-        android:layout_below="@+id/testValue"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_above="@+id/button"
+        android:layout_below="@+id/testValue"
         android:layout_centerHorizontal="true" />
-
-
 
     <Button
         android:id="@+id/button"

@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 
 import com.dannysh.heartme.R;
+import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
 public class HeartMeActivity extends AppCompatActivity implements FeedbackView {
@@ -28,21 +29,7 @@ public class HeartMeActivity extends AppCompatActivity implements FeedbackView {
         _spinner = findViewById(R.id.progressBar1);
 
         _testName = findViewById(R.id.testName);
-//        _testName.setOnTouchListener(new View.OnTouchListener() {
-//            @Override
-//            public boolean onTouch(View view, MotionEvent motionEvent) {
-//                ((EditText)view).setText("");
-//                return true;
-//            }
-//        });
         _testValue = findViewById(R.id.testValue);
-//        _testValue.setOnTouchListener(new View.OnTouchListener() {
-//            @Override
-//            public boolean onTouch(View view, MotionEvent motionEvent) {
-//                ((EditText)view).setText("");
-//                return true;
-//            }
-//        });
         _imgView = findViewById(R.id.feedbackImg);
         _fbPresenter = new FeedbackPresenter(this);
 
@@ -51,10 +38,8 @@ public class HeartMeActivity extends AppCompatActivity implements FeedbackView {
             @Override
             public void onClick(View view) {
                 _spinner.setVisibility(View.VISIBLE);
-                _imgView.setVisibility(View.GONE);
-                ImageView imgView = findViewById(R.id.feedbackImg);
                 _fbPresenter.checkResults(_testName.getText().toString(), Double.parseDouble(_testValue.getText().toString()));
-
+//                _imgView.setVisibility(View.INVISIBLE);
             }
         });
 
@@ -63,17 +48,28 @@ public class HeartMeActivity extends AppCompatActivity implements FeedbackView {
     @Override
     protected void onStart() {
         super.onStart();
-        _spinner.setVisibility(View.GONE);
-        _imgView.setVisibility(View.GONE);
+        _spinner.setVisibility(View.INVISIBLE);
+//        _imgView.setVisibility(View.INVISIBLE);
     }
 
     @Override
     public void showFeedback(String formalTestName, String url) {
-        //deactivate _spinner
-        _spinner.setVisibility(View.GONE);
+
         //use picasso to show relevant image based on urls in Constants.
-        Picasso.get().load(url).into(_imgView);
-//        _imgView.setVisibility(View.VISIBLE);
-        _testName.setText(formalTestName);
+        _imgView.setVisibility(View.VISIBLE);
+        Picasso.get().load(url).into(_imgView, new Callback() {
+            @Override
+            public void onSuccess() {
+                _spinner.setVisibility(View.INVISIBLE);
+                _testName.setText(formalTestName);
+            }
+
+            @Override
+            public void onError(Exception e) {
+
+            }
+        });
+
+
     }
 }
