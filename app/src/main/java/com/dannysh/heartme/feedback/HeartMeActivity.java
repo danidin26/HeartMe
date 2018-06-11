@@ -1,42 +1,60 @@
 package com.dannysh.heartme.feedback;
 
-import android.app.Activity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.ProgressBar;
 
 import com.dannysh.heartme.R;
-import com.dannysh.heartme.utils.Constants;
-import com.dannysh.heartme.utils.NetworkUtils;
+import com.squareup.picasso.Picasso;
 
-public class HeartMeActivity extends Activity implements FeedbackView {
+public class HeartMeActivity extends AppCompatActivity implements FeedbackView {
 
-    EditText testName , testValue;
-    Button submitBtn;
-    FeedbackPresenter fbPresenter;
+    EditText _testName, _testValue;
+    Button _submitBtn;
+    FeedbackPresenter _fbPresenter;
+    private ProgressBar _spinner;
+    private ImageView _imgView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        //load data
-        NetworkUtils.getBloodTestConfig();
 
-        testName  = findViewById(R.id.testName);
-        testValue = findViewById(R.id.testValue);
+        _spinner = findViewById(R.id.progressBar1);
 
-        fbPresenter = new FeedbackPresenter(this,this);
+        _testName = findViewById(R.id.testName);
+//        _testName.setOnTouchListener(new View.OnTouchListener() {
+//            @Override
+//            public boolean onTouch(View view, MotionEvent motionEvent) {
+//                ((EditText)view).setText("");
+//                return true;
+//            }
+//        });
+        _testValue = findViewById(R.id.testValue);
+//        _testValue.setOnTouchListener(new View.OnTouchListener() {
+//            @Override
+//            public boolean onTouch(View view, MotionEvent motionEvent) {
+//                ((EditText)view).setText("");
+//                return true;
+//            }
+//        });
+        _imgView = findViewById(R.id.feedbackImg);
+        _fbPresenter = new FeedbackPresenter(this);
 
-        submitBtn = findViewById(R.id.button);
-        submitBtn.setOnClickListener(new View.OnClickListener() {
+        _submitBtn = findViewById(R.id.button);
+        _submitBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                boolean validInput = fbPresenter.validateTestName(testName.getText().toString());
-                if(validInput){
-                    //activate spinner
-                    fbPresenter.getResult(testName.getText().toString(),Double.parseDouble(testValue.getText().toString()));
-                }
+                _spinner.setVisibility(View.VISIBLE);
+                _imgView.setVisibility(View.GONE);
+                ImageView imgView = findViewById(R.id.feedbackImg);
+                _fbPresenter.checkResults(_testName.getText().toString(), Double.parseDouble(_testValue.getText().toString()));
+
             }
         });
 
@@ -45,23 +63,17 @@ public class HeartMeActivity extends Activity implements FeedbackView {
     @Override
     protected void onStart() {
         super.onStart();
+        _spinner.setVisibility(View.GONE);
+        _imgView.setVisibility(View.GONE);
     }
 
     @Override
-    protected void onResume() {
-        super.onResume();
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-    }
-
-
-    @Override
-    public void showFeedback(Constants.TetsFeedBackStatus status) {
-        //deactivate spinner
-
+    public void showFeedback(String formalTestName, String url) {
+        //deactivate _spinner
+        _spinner.setVisibility(View.GONE);
         //use picasso to show relevant image based on urls in Constants.
+        Picasso.get().load(url).into(_imgView);
+//        _imgView.setVisibility(View.VISIBLE);
+        _testName.setText(formalTestName);
     }
 }
